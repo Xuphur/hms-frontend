@@ -1,0 +1,125 @@
+<div class="card shadow bg-white rounded">
+  <div class="card-header shadow rounded">
+    <h3>Customer List</h3>
+  </div>
+  <div class="row card-body">
+    <div class="col">
+      <input
+        [(ngModel)]="name"
+        class="search"
+        type="text"
+        name=""
+        placeholder="Search By Name"
+        (change)="searchByName(name)"
+      />
+      <button type="button" class="btn-search" (click)="searchByName(name)">
+        <i class="fas fa-angle-down"></i>
+      </button>
+    </div>
+    <div class="col">
+      <input
+        [(ngModel)]="cnic"
+        class="search"
+        type="text"
+        name=""
+        placeholder="Search By CNIC"
+        onkeyup="searchByCnic(cnic)"
+      />
+      <button type="button" class="btn-search" (click)="searchByCnic(cnic)">
+        <i class="fas fa-angle-down"></i>
+      </button>
+    </div>
+    <div class="col">
+      <input
+        [(ngModel)]="mobile"
+        class="search"
+        type="text"
+        name=""
+        placeholder="Search By Mobile"
+        (change)="searchByMobile(mobile)"
+      />
+      <button type="button" class="btn-search" (click)="searchByMobile(mobile)">
+        <i class="fas fa-angle-down"></i>
+      </button>
+    </div>
+
+    <div class="col float-right">
+      <button class="btn btn-primary btn-circle" (click)="open()">
+        <i class="fa fa-plus"></i>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="card shadow bg-white rounded">
+  <div class="card-body">
+    <table>
+      <thead>
+        <th>Name &nbsp; <i class="fas fa-sort"></i></th>
+        <th>Contact&nbsp;<i class="fas fa-sort"></i></th>
+        <th>CNIC&nbsp;<i class="fas fa-sort"></i></th>
+        <th>Guarantor&nbsp;<i class="fas fa-sort"></i></th>
+        <th>Contact&nbsp;<i class="fas fa-sort"></i></th>
+        <th>Actions</th>
+      </thead>
+      <tbody
+        *ngFor="
+          let customer of (customerlist
+            | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize)
+        "
+      >
+        <td>{{ customer?.customer?.name }}</td>
+        <td>{{ customer?.customer?.mobile1 }}</td>
+        <td>{{ customer?.customer?.cnic }}</td>
+        <td>{{ customer?.guarantor?.gname }}</td>
+        <td>{{ customer?.guarantor?.gmobile }}</td>
+        <td>
+          <button
+            class="btn btn-sm btn-outline-warning"
+            (click)="edit(customer._id)"
+          >
+          <i class="fas fa-edit"></i> Edit</button
+          >&nbsp;
+          <button
+            class="btn btn-sm btn-outline-danger"
+            (click)="deleteCustomer(customer._id)"
+          >
+            <i class="far fa-trash-alt"></i> Delete</button
+          >&nbsp;
+          <button
+            class="btn btn-sm btn-outline-success"
+            (click)="viewCustomer(customer._id)"
+          >
+            <i class="far fa-eye"></i> View
+          </button>
+        </td>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="card-footer">
+    <div class="row">
+       <div class="col-2">
+           <label for="pageSize">Show Rows</label>
+           <select
+             [(ngModel)]="pageSize"
+             type="text"
+             name="pageSize"
+             id="pageSize"
+           >
+             <option value="5">5</option>
+             <option value="10">10</option>
+             <option value="20">20</option>
+           </select>
+         </div>
+
+      <div class="col-10">
+       <ngb-pagination
+         class="d-flex justify-content-end"
+         [(page)]="page"
+         [pageSize]="pageSize"
+         [collectionSize]="customerlist.length"
+         [maxSize]="5"
+       >
+       </ngb-pagination>
+      </div>
+    </div>

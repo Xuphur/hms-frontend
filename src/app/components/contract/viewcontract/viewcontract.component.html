@@ -1,0 +1,64 @@
+<button type="button" class="close" aria-label="Close" (click)="close()">
+  <span aria-hidden="true">&times;</span>
+</button>
+
+<div class="container">
+  <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12">
+    <div class="card">
+      <h1>{{ contract?.customer.customer.name }}</h1>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr class="border-0">
+                <th class="border-0">Contract Date</th>
+                <th class="border-0">Start Date</th>
+                <th class="border-0">Duration</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ contract?.contractDate }}</td>
+                <td>{{ contract?.startDate }}</td>
+                <td>{{ contract?.duration }}</td>
+              </tr>
+              <th class="border-0">Increment</th>
+              <th class="border-0">Increment Schedule</th>
+              <th class="border-0">Expiry Date</th>
+
+              <tr>
+                <td>{{ contract?.increment }}</td>
+                <td>{{ contract?.incrementSchedule }}</td>
+                <td>{{ contract?.expiryDate }}</td>
+              </tr>
+              <th class="border-0">Cancelation</th>
+              <th class="border-0">PaymentMethod</th>
+              <th class="border-0">Price Quoted</th>
+              <tr>
+                <td>{{ contract?.cancelation }}</td>
+                <td>{{ contract?.paymentMethod }}</td>
+                <td>{{ contract?.priceQuoted }}</td>
+              </tr>
+              <th class="border-0">Total Payable</th>
+              <th class="border-0">Down Payment</th>
+              <th class="border-0">Advance Payment</th>
+              <tr>
+                <td>{{ contract?.totalPayable }}</td>
+                <td>{{ contract?.downPayment }}</td>
+                <td>{{ contract?.avdancePayment }}</td>
+              </tr>
+              <th class="border-0">Status</th>
+              <th class="border-0">Customer</th>
+              <th class="border-0">Asset</th>
+              <tr>
+                <td>{{ contract?.status }}</td>
+                <td>{{ contract?.customer.customer.name }}</td>
+                <td>{{ contract?.asset.assetType }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,109 @@
+<div class="card shadow bg-white rounded">
+    <div class="card-header shadow rounded">
+        <h3>Contract List</h3>
+    </div>
+    <div class="row card-body">
+        <div class="col">
+            <input [(ngModel)]="status" class="search" type="text" name="" placeholder="Search By Status" (change)="searchByStatus(status)" />
+            <button type="button" class="btn-search" (click)="searchByStatus(status)">
+        <i class="fas fa-angle-down"></i>
+      </button>
+        </div>
+        <div class="col">
+            <label>Select Date</label>
+            <input [(ngModel)]="month" class="search" type="date" name="month" placeholder="Search By month" />
+            <button type="button" class="btn-search" (click)="searchByMonth(month)">
+        <i class="fas fa-angle-down"></i>
+      </button>
+        </div>
+        <div class="col">
+            <input [(ngModel)]="type" class="search" type="text" name="" placeholder="Search By xyz" />
+            <button type="button" class="btn-search" (click)="searchByType(type)">
+        <i class="fas fa-angle-down"></i>
+      </button>
+        </div>
+
+        <div class="col float-right newbox">
+            <button class="btn btn-primary btn-circle" (click)="open()">
+        <i class="fa fa-plus"></i>
+      </button>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow bg-white rounded">
+    <div class="card-body">
+        <table>
+            <thead>
+                <th>Status &nbsp; <i class="fas fa-sort"></i></th>
+                <th>Customer&nbsp;<i class="fas fa-sort"></i></th>
+                <th>Asset&nbsp;<i class="fas fa-sort"></i></th>
+                <th>Asset Owner&nbsp;<i class="fas fa-sort"></i></th>
+                <th>Contract Date&nbsp;<i class="fas fa-sort"></i></th>
+                <th>Balance&nbsp;<i class="fas fa-sort"></i></th>
+                <th>Next Due&nbsp;<i class="fas fa-sort"></i></th>
+                <th>Installment&nbsp;<i class="fas fa-sort"></i></th>
+                <th>Actions</th>
+                <!-- <th>Owner Address</th> -->
+            </thead>
+            <tbody *ngFor="
+          let contract of (contractlist
+            | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize)
+        ">
+                <td>{{ contract?.status }}</td>
+                <td>{{ contract?.customer?.customer?.name }}</td>
+                <td>{{ contract?.asset?.assetType }}</td>
+                <td>{{ contract?.asset?.owner?.name }}</td>
+                <td>{{ contract?.startDate }}</td>
+                <td>{{ contract?.balance }}</td>
+                <td>{{ contract?.nxtDue | date: 'mediumDate'}} </td>
+                <td>{{ contract?.installment }}</td>
+                <td>
+                    <button class="btn btn-sm btn-outline-warning" (click)="edit(contract._id)">
+          <i class="fas fa-edit"></i> Edit</button
+          >&nbsp;
+          <button
+            class="btn btn-sm btn-outline-danger"
+            (click)="deleteContract(contract._id)"
+          >
+            <i class="far fa-trash-alt"></i> Delete</button
+          >&nbsp;
+          <button
+            class="btn btn-sm btn-outline-primary"
+            (click)="viewContract(contract._id)"
+          >
+            <i class="fa fa-eye"></i> View</button
+          >&nbsp;
+          <button
+            class="btn btn-sm btn-outline-success"
+            (click)="addReciept(contract._id)"
+          >
+          <i class="fas fa-dollar-sign"></i> Reciept</button
+          >&nbsp;
+          <button
+            class="btn btn-sm btn-outline-success"
+            (click)="listReciept(contract._id)"
+          >
+          <i class="fas fa-file-invoice-dollar"></i> Ledger
+          </button>
+                </td>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="card-footer">
+    <div class="row">
+        <div class="col-2">
+            <label for="pageSize">Show Rows</label>
+            <select [(ngModel)]="pageSize" type="text" name="pageSize" id="pageSize">
+             <option value="5">5</option>
+             <option value="10">10</option>
+             <option value="20">20</option>
+           </select>
+        </div>
+
+        <div class="col-10">
+            <ngb-pagination class="d-flex justify-content-end" [(page)]="page" [pageSize]="pageSize" [collectionSize]="contractlist.length" [maxSize]="5">
+            </ngb-pagination>
+        </div>
+    </div>

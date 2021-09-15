@@ -1,0 +1,155 @@
+<div class="card shadow rounded">
+    <div class="card-header shadow rounded">
+        <div class="row">
+            <div class="col">
+                <h3>{{ asset?.title | titlecase }}</h3>
+            </div>
+            <div class="col">
+                <div class="close">
+                    <button class="btn btn-primary" (click)="close()">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                      </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="this.asset.assetType == 'vehicle'" class="details">
+        <h5>Vehicle Details</h5>
+        <div class="row">
+            <div class="col-6 col-md-4">
+                <label for="reg">Registration</label> &nbsp; {{ asset?.assetDetail?.vehicle?.reg | titlecase}}
+            </div>
+
+            <div class="col-6 col-md-4">
+                <label for="make">Make</label> &nbsp; {{ asset?.assetDetail?.vehicle?.make | titlecase}}
+            </div>
+
+            <div class="col-6 col-md-4">
+                <label for="model">Model</label> &nbsp; {{ asset?.assetDetail?.vehicle.model | titlecase}}
+            </div>
+
+            <div class="col-6 col-md-4">
+                <label for="year">Year</label> &nbsp; {{ asset?.assetDetail?.vehicle?.year }}
+            </div>
+
+            <div class="col-6 col-md-4">
+                <label for="colour">Colour</label> &nbsp; {{ asset?.assetDetail?.vehicle?.colour | titlecase}}
+            </div>
+
+            <div class="col-6 col-md-4">
+                <label for="status">Status</label> &nbsp; {{ asset?.assetDetail?.vehicle?.status | titlecase}}
+            </div>
+        </div>
+    </div>
+    <div *ngIf="this.asset.assetType == 'house'" class="details">
+        <h5>House Details</h5>
+
+        <div class="row">
+            <div class="col-6 col-md-4">
+                <label for="floor">Floor</label> &nbsp; {{ asset?.assetDetail?.house?.address?.floor }}
+            </div>
+            <div class="col-6 col-md-4">
+                <label for="floor">House Number</label> &nbsp; {{ asset?.assetDetail?.house?.address?.number }}
+            </div>
+
+            <div class="col-6 col-md-4">
+                <label for="street">Street</label> &nbsp; {{ asset?.assetDetail?.house?.address?.street | titlecase}}
+            </div>
+
+            <div class="col-6 col-md-4">
+                <label for="sector">Sector</label> &nbsp; {{ asset?.assetDetail?.house?.address?.sector }}
+            </div>
+
+            <div class="col-6 col-md-4">
+                <label for="city">City</label> &nbsp; {{ asset?.assetDetail?.house?.address?.city | titlecase}}
+            </div>
+
+            <div class="col-6 col-md-4">
+                <label for="province">Province</label> &nbsp; {{ asset?.assetDetail?.house?.address?.province | titlecase}}
+            </div>
+
+            <div class="col-6 col-md-4">
+                <label for="zipcode">Zip Code</label> &nbsp; {{ asset?.assetDetail?.house?.address?.zipcode }}
+            </div>
+
+            <div class="col-6 col-md-4">
+                <label for="area">Area / Size</label> &nbsp; {{ asset?.assetDetail?.house?.address?.area }}
+            </div>
+
+            <div class="col-6 col-md-4">
+                <label for="actualPrice">Actual Price</label> &nbsp; {{ asset?.assetDetail?.house?.address?.actualPrice }}
+            </div>
+        </div>
+    </div>
+    <div *ngIf="this.asset.assetType == 'item'" class="details">
+        <h5>Item Details</h5>
+        <div class="row">
+            <div class="col-6 col-md-4">
+                <label for="title">Title</label> &nbsp; {{ asset?.assetDetail?.item?.title | titlecase}}
+            </div>
+
+            <div class="col-6 col-md-4">
+                <label for="make">Make</label> &nbsp; {{ asset?.assetDetail?.item?.make | titlecase}}
+            </div>
+
+            <div class="col-6 col-md-4">
+                <label for="model">Model</label> &nbsp; {{ asset?.assetDetail?.item?.model | titlecase}}
+            </div>
+
+            <div class="col-6 col-md-4">
+                <label for="year">Year</label> &nbsp; {{ asset?.assetDetail?.item?.year }}
+            </div>
+
+            <div class="col-6 col-md-4">
+                <label for="discription">Discription</label> &nbsp; {{ asset?.assetDetail?.item?.discription }}
+            </div>
+
+            <div class="col-6 col-md-4">
+                <label for="actualPrice">Actual Price</label> &nbsp; {{ asset?.assetDetail?.item?.actualPrice }}
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <h5>Owner Details</h5>
+        <div class="row">
+            <div class="col">
+                <strong> {{ asset?.owner?.name | titlecase}} </strong> &nbsp; S/O &nbsp;
+                <strong> {{ asset?.owner?.fatherName | titlecase }}</strong>
+            </div>
+            <div class="col">
+                <label for="cnic">CNIC</label> &nbsp; {{ asset?.owner?.cnic }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="mobile1">Contact</label> &nbsp; {{ asset?.owner?.mobile1 }} / {{ asset?.owner?.mobile2 }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="Address"><strong>Address</strong></label>
+            </div>
+            <div class="col-6 col-md-4">
+                <label for="floor" class="label">floor #:</label> {{ asset?.owner?.address?.floor }}
+            </div>
+            <div class="col-6 col-md-4">
+                <label for="house" class="label"> House #:</label> {{ asset?.owner?.address?.number }}
+            </div>
+            <div class="col-6 col-md-4">
+                <label for="Street" class="label"> Street:</label> {{ asset?.owner?.address?.street | titlecase}}
+            </div>
+            <div class="col-6 col-md-4">
+                <label for="Sector" class="label"> Sector #:</label> {{ asset?.owner?.address?.sector }}
+            </div>
+            <div class="col-6 col-md-4">
+                <label for="City" class="label"> City:</label> {{ asset?.owner?.address?.city | titlecase}}
+            </div>
+            <div class="col-6 col-md-4">
+                <label for="Province" class="label"> Province #:</label> {{ asset?.owner?.address?.province | titlecase}}
+            </div>
+            <div class="col-6 col-md-4">
+                <label for="Zip-Code" class="label"> Zip-Code #:</label> {{ asset?.owner?.address?.zipcode }}
+            </div>
+        </div>
+    </div>

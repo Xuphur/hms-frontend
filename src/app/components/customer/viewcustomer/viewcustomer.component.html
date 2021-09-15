@@ -1,0 +1,126 @@
+<div class="card shadow rounded">
+    <div class="card-header shadow rounded">
+        <div class="row">
+            <div class="col">
+                <h3>{{ customer?.customer?.name }}</h3>
+            </div>
+            <div class="col">
+                <div class="close">
+                    <button class="btn btn-primary" (click)="close()">
+                <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="details">
+        <div class="row">
+            <div class="col-6 col-md-4">
+                <label for="fathername" class="label">Father Name #:</label> {{ customer?.customer?.fatherName }} </div>
+            <div class="col-6 col-md-4">
+                <label for="CNIC" class="label">CNIC #:</label> {{ customer?.customer?.cnic }} </div>
+            <div class="col-6 col-md-4">
+                <label for="mobile1" class="label">Mobile 1 #:</label> {{ customer?.customer?.mobile1 }} </div>
+            <div class="col-6 col-md-4">
+                <label for="mobile2" class="label">Mobile 2 #:</label> {{ customer?.customer?.mobile2 }} </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="Address"><strong>Address</strong></label>
+            </div>
+            <div class="col-6 col-md-4">
+                <label for="floor" class="label">floor #:</label> {{ customer?.customer?.address?.floor }}
+            </div>
+            <div class="col-6 col-md-4">
+                <label for="house" class="label"> House #:</label> {{ customer?.customer?.address?.number }}
+            </div>
+            <div class="col-6 col-md-4">
+                <label for="Street" class="label"> Street:</label> {{ customer?.customer?.address?.street | titlecase}}
+            </div>
+            <div class="col-6 col-md-4">
+                <label for="Sector" class="label"> Sector #:</label> {{ customer?.customer?.address?.sector }}
+            </div>
+            <div class="col-6 col-md-4">
+                <label for="City" class="label"> City:</label> {{ customer?.customer?.address?.city | titlecase}}
+            </div>
+            <div class="col-6 col-md-4">
+                <label for="Province" class="label"> Province #:</label> {{ customer?.customer?.address?.province | titlecase}}
+            </div>
+            <div class="col-6 col-md-4">
+                <label for="Zip-Code" class="label"> Zip-Code #:</label> {{ customer?.customer?.address?.zipcode }}
+            </div>
+        </div>
+
+        <div class="card shadow rounded">
+            <div class="cardHeader-2 shadow rounded">
+                <button type="button" class="btn btn-sm" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+              Click here to View Guarantor
+            </button>
+            </div>
+        </div>
+        <div id="collapseExample" [ngbCollapse]="isCollapsed">
+            <div class="col-6 col-md-4">
+                <label for="gname" class="label">Full Name :</label> {{ customer?.guarantor?.gname }}
+            </div>
+            <div class="col-6 col-md-4">
+                <label for="gfather" class="label">Father Name :</label> {{ customer?.guarantor?.gfather }}
+            </div>
+            <div class="col-6 col-md-4">
+                <label for="gcnic" class="label">CNIC #:</label> {{ customer?.guarantor?.gcnic }}
+            </div>
+            <div class="col-6 col-md-4">
+                <label for="gmobile1" class="label">Mobile 1 #:</label> {{ customer?.guarantor?.gmobile1 }}
+            </div>
+            <div class="col-6 col-md-4">
+                <label for="gmobile2" class="label">Mobile 2 #:</label> {{ customer?.guarantor?.gmobile2 }}
+            </div>
+            <div class="col-6 col-md-4">
+                <label for="gname" class="label">Father Name #:</label> {{ customer?.guarantor?.gfather }}
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label for="Address"><strong>Address</strong></label>
+                </div>
+                <div class="col-6 col-md-4">
+                    <label for="floor" class="label">floor #:</label> {{ customer?.guarantor?.gaddress?.floor }}
+                </div>
+                <div class="col-6 col-md-4">
+                    <label for="house" class="label"> House #:</label> {{ customer?.guarantor?.gaddress?.number }}
+                </div>
+                <div class="col-6 col-md-4">
+                    <label for="Street" class="label"> Street:</label> {{ customer?.guarantor?.gaddress?.street | titlecase}}
+                </div>
+                <div class="col-6 col-md-4">
+                    <label for="Sector" class="label"> Sector #:</label> {{ customer?.guarantor?.gaddress?.sector }}
+                </div>
+                <div class="col-6 col-md-4">
+                    <label for="City" class="label"> City:</label> {{ customer?.guarantor?.gaddress?.city | titlecase}}
+                </div>
+                <div class="col-6 col-md-4">
+                    <label for="Province" class="label"> Province #:</label> {{ customer?.guarantor?.gaddress?.province | titlecase}}
+                </div>
+                <div class="col-6 col-md-4">
+                    <label for="Zip-Code" class="label"> Zip-Code #:</label> {{ customer?.guarantor?.gaddress?.zipcode }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <table>
+        <thead>
+            <th>Contract Date</th>
+            <th>Heading1</th>
+            <th>Heading2</th>
+        </thead>
+        <tr *ngFor="let contract of contractlist">
+            <td>{{contract?.contractDate}}</td>
+            <td>{{contract?.saleType}}</td>
+            <td>{{contract?.asset?.title}}</td>
+
+        </tr>
+    </table>
+</div>

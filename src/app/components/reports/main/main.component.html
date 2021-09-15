@@ -1,0 +1,155 @@
+<div class=" col card shadow rounded">
+    <div class="card-header">
+        <h3> Main Reports</h3>
+    </div>
+
+    <button type="button" class="btn btn-sm" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+      Upload Data from Excel File  
+      </button>
+    <div class="card-body">
+        <div class="row" id="collapseExample" [ngbCollapse]="isCollapsed">
+
+            <div class="col-6 col-md-4">
+                <label for="file">Upload Assets</label>
+                <br>
+                <input type="file" name="file" placeholder="Browse" (change)="onFileChange($event)" />
+                <button type="submit" class="btn btn-sm btn-outline-success" (click)="saveAssets()">
+                    Save
+                  </button>
+            </div>
+            <div class="col-6 col-md-4">
+                <label for="file">Upload Customers</label>
+                <br>
+                <input type="file" name="file" placeholder="Browse" (change)="onFileChange($event)" />
+                <button type="submit" class="btn btn-sm btn-outline-success" (click)="saveCustomers()">
+                    Save
+                  </button>
+            </div>
+            <div class="col-6 col-md-4">
+                <label for="file">Upload Contracts</label>
+                <br>
+                <input type="file" name="file" placeholder="Browse" (change)="onFileChange($event)" />
+                <button type="submit" class="btn btn-sm btn-outline-success" (click)="saveContracts()">
+                  Save
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="month">Select Month</label>
+                <select [(ngModel)]="month.start" type="text" name="month.start" id="month.start" class="form-control" placeholder="Select Start Date" (change)="searchByMonth(month)">
+          <option value="1">January</option>
+          <option value="2">February</option>
+          <option value="3">March</option>
+          <option value="4">April</option>
+          <option value="5">May</option>
+          <option value="6">June</option>
+          <option value="7">July</option>
+          <option value="8">August</option>
+          <option value="9">September</option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
+        </select>
+            </div>
+
+            <div class="col">
+                <label for="month">Select Month</label>
+                <select [(ngModel)]="month.end" type="text" name="month.end" id="month.end" class="form-control" placeholder="Select End Date" (change)="searchByMonth(month)">
+          <option value="1">January</option>
+          <option value="2">February</option>
+          <option value="3">March</option>
+          <option value="4">April</option>
+          <option value="5">May</option>
+          <option value="6">June</option>
+          <option value="7">July</option>
+          <option value="8">August</option>
+          <option value="9">September</option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
+        </select>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="card shadow bg-white rounded">
+    <div class="card-body">
+        <table>
+            <thead>
+                <th>Status &nbsp; <i class="fas fa-sort"></i></th>
+                <th>Customer&nbsp;<i class="fas fa-sort"></i></th>
+                <th>Asset&nbsp;<i class="fas fa-sort"></i></th>
+                <th>Asset Owner&nbsp;<i class="fas fa-sort"></i></th>
+                <th>Contract Date&nbsp;<i class="fas fa-sort"></i></th>
+                <th>Balance&nbsp;<i class="fas fa-sort"></i></th>
+                <th>Next Due&nbsp;<i class="fas fa-sort"></i></th>
+                <th>Installment&nbsp;<i class="fas fa-sort"></i></th>
+                <th>Actions</th>
+                <!-- <th>Owner Address</th> -->
+            </thead>
+            <tbody *ngFor="
+          let contract of (contractlist
+            | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize)
+        ">
+                <td>{{ contract?.status }}</td>
+                <td>{{ contract?.customer?.customer?.name }}</td>
+                <td>{{ contract?.asset?.assetType }}</td>
+                <td>{{ contract?.asset?.owner?.name }}</td>
+                <td>{{ contract?.startDate }}</td>
+                <td>{{ contract?.balance }}</td>
+                <td>{{ contract?.nxtDue | date: "mediumDate" }}</td>
+                <td>{{ contract?.installment }}</td>
+                <td>
+                    <button class="btn btn-sm btn-outline-warning" (click)="edit(contract._id)">
+            <i class="fas fa-edit"></i> Edit</button
+          >&nbsp;
+          <button
+            class="btn btn-sm btn-outline-danger"
+            (click)="deleteContract(contract._id)"
+          >
+            <i class="far fa-trash-alt"></i> Delete</button
+          >&nbsp;
+          <button
+            class="btn btn-sm btn-outline-primary"
+            (click)="viewContract(contract._id)"
+          >
+            <i class="fa fa-eye"></i> View</button
+          >&nbsp;
+          <button
+            class="btn btn-sm btn-outline-success"
+            (click)="addReciept(contract._id)"
+          >
+            <i class="fas fa-dollar-sign"></i> Reciept</button
+          >&nbsp;
+          <button
+            class="btn btn-sm btn-outline-success"
+            (click)="listReciept(contract._id)"
+          >
+            <i class="fas fa-file-invoice-dollar"></i> Ledger
+          </button>
+                </td>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="card-footer">
+    <div class="row">
+        <div class="col-2">
+            <label for="pageSize">Show Rows</label>
+            <select [(ngModel)]="pageSize" type="text" name="pageSize" id="pageSize">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+      </select>
+        </div>
+
+        <div class="col-10">
+            <ngb-pagination class="d-flex justify-content-end" [(page)]="page" [pageSize]="pageSize" [collectionSize]="contractlist.length" [maxSize]="5">
+            </ngb-pagination>
+        </div>
+    </div>
+</div>

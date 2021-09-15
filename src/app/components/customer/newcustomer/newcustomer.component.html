@@ -1,0 +1,307 @@
+<form>
+  <div class="card shadow rounded">
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <h5>Customer</h5>
+    <div class="row card-body">
+      <div class="col-6 col-md-4">
+        <label for="name">Customer Name</label>
+        <input
+          [(ngModel)]="customer.customer.name"
+          type="text"
+          name="name"
+          id="name"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+
+      <div class="col-6 col-md-4">
+        <label for="fatherName">Father Name</label>
+        <input
+          [(ngModel)]="customer.customer.fatherName"
+          type="text"
+          name="fatherName"
+          id="fatherName"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+
+      <div class="col-6 col-md-4">
+        <label for="cnic">CNIC</label>
+        <input
+          [(ngModel)]="customer.customer.cnic"
+          type="text"
+          name="cnic"
+          id="cnic"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+
+      <div class="col-6 col-md-4">
+        <label for="mobile1">Mobile 1</label>
+        <input
+          [(ngModel)]="customer.customer.mobile1"
+          type="text"
+          name="mobile1"
+          id="mobile1"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+
+      <div class="col-6 col-md-4">
+        <label for="mobile2">Mobile2</label>
+        <input
+          [(ngModel)]="customer.customer.mobile2"
+          type="text"
+          name="mobile2"
+          id="mobile2"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+    </div>
+
+    <div class="col-6 col-md-4">
+      <h5>Address</h5>
+    </div>
+    <div class="row">
+      <div class="col-6 col-md-4">
+        <label for="floor">Floor</label>
+        <input
+          [(ngModel)]="customer.customer.address.floor"
+          type="text"
+          name="floor"
+          id="floor"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+      <div class="col-6 col-md-4">
+        <label for="number">House Number</label>
+        <input
+          [(ngModel)]="customer.customer.address.number"
+          type="text"
+          name="number"
+          id="number"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+      <div class="col-6 col-md-4">
+        <label for="street">Street</label>
+        <input
+          [(ngModel)]="customer.customer.address.street"
+          type="text"
+          name="street"
+          id="street"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+      <div class="col-6 col-md-4">
+        <label for="sector">Sector</label>
+        <input
+          [(ngModel)]="customer.customer.address.sector"
+          type="text"
+          name="sector"
+          id="sector"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+      <div class="col-6 col-md-4">
+        <label for="city">City</label>
+        <input
+          [(ngModel)]="customer.customer.address.city"
+          type="text"
+          name="city"
+          id="city"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+      <div class="col-6 col-md-4">
+        <label for="province">Province</label>
+        <input
+          [(ngModel)]="customer.customer.address.province"
+          type="text"
+          name="province"
+          id="province"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+      <div class="col-6 col-md-4">
+        <label for="zipcode">Zip Code</label>
+        <input
+          [(ngModel)]="customer.customer.address.zipcode"
+          type="text"
+          name="zipcode"
+          id="zipcode"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+    </div>
+  </div>
+  <div class="card shadow rounded">
+    <h5>Guarantor</h5>
+    <div class="row">
+      <div class="col-6 col-md-4">
+        <label for="gname">Guarantor Name</label>
+        <input
+          [(ngModel)]="customer.guarantor.gname"
+          type="text"
+          name="gname"
+          id="gname"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+
+      <div class="col-6 col-md-4">
+        <label for="fatherName">Father Name</label>
+        <input
+          [(ngModel)]="customer.guarantor.gfather"
+          type="text"
+          name="fatherName"
+          id="fatherName"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+
+      <div class="col-6 col-md-4">
+        <label for="cnic">CNIC</label>
+        <input
+          [(ngModel)]="customer.guarantor.gcnic"
+          type="text"
+          name="cnic"
+          id="cnic"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+
+      <div class="col-6 col-md-4">
+        <label for="mobile1">Mobile 1</label>
+        <input
+          [(ngModel)]="customer.guarantor.gmobile1"
+          type="text"
+          name="mobile1"
+          id="mobile1"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+      <div class="col-6 col-md-4">
+        <label for="mobile2">Mobile 2</label>
+        <input
+          [(ngModel)]="customer.guarantor.gmobile2"
+          type="text"
+          name="mobile2"
+          id="mobile2"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+
+      <div class="col-6 col-md-4">
+        <label>Address</label>
+      </div>
+      <div class="col-6 col-md-4">
+        <label for="floor">Floor</label>
+        <input
+          [(ngModel)]="customer.guarantor.gaddress.floor"
+          type="text"
+          name="floor"
+          id="floor"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+      <div class="col-6 col-md-4">
+        <label for="number">House Number</label>
+        <input
+          [(ngModel)]="customer.guarantor.gaddress.number"
+          type="text"
+          name="number"
+          id="number"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+      <div class="col-6 col-md-4">
+        <label for="street">Street</label>
+        <input
+          [(ngModel)]="customer.guarantor.gaddress.street"
+          type="text"
+          name="street"
+          id="street"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+      <div class="col-6 col-md-4">
+        <label for="sector">Sector</label>
+        <input
+          [(ngModel)]="customer.guarantor.gaddress.sector"
+          type="text"
+          name="sector"
+          id="sector"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+      <div class="col-6 col-md-4">
+        <label for="city">City</label>
+        <input
+          [(ngModel)]="customer.guarantor.gaddress.city"
+          type="text"
+          name="city"
+          id="city"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+      <div class="col-6 col-md-4">
+        <label for="province">Province</label>
+        <input
+          [(ngModel)]="customer.guarantor.gaddress.province"
+          type="text"
+          name="province"
+          id="province"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+      <div class="col-6 col-md-4">
+        <label for="zipcode">Zip Code</label>
+        <input
+          [(ngModel)]="customer.guarantor.gaddress.zipcode"
+          type="text"
+          name="zipcode"
+          id="zipcode"
+          class="form-control"
+          placeholder=""
+        />
+      </div>
+    </div>
+    <div>
+      <div class="row float-right">
+        <button
+          type="submit"
+          (click)="addCustomer(customer)"
+          class="btn btn-primary save"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

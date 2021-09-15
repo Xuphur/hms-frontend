@@ -1,0 +1,43 @@
+<nav class="navbar">
+    <a class="navbar-brand mb-0 h1" [routerLink]="['/dashboard']" routerLinkActive="router-link-active">AMS</a
+      >
+    <div class="col">
+      <button
+      class="btn btn-sm btn-search"
+      [routerLink]="['/asset/list']"
+      routerLinkActive="router-link-active"
+    >Assets</button>
+      <button
+      class="btn btn-sm btn-search"
+      [routerLink]="['/customer/list']"
+      routerLinkActive="router-link-active"
+    >Customers</button>
+      <button
+      class="btn btn-sm btn-search"
+      [routerLink]="['/contract/list']"
+      routerLinkActive="router-link-active"
+    >Contracts</button>
+  
+    </div>
+    <div ngbDropdown [placement]="['bottom-right']" class="float-right">
+      <button
+        class="btn btn-sm btn-search"
+        id="dropdownBasic1"
+        ngbDropdownToggle
+      >User Management</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button class="btn"
+        ngbDropdownItem
+        [routerLink]="['/signup']"
+        routerLinkActive="router-link-active"
+      >
+  
+            <i class="fas fa-user-plus"></i> &nbsp; Create New
+        </button
+        >
+        <button class="btn" ngbDropdownItem (click)="logout()">
+            <i class="fas fa-sign-out-alt"></i> &nbsp; Logout
+        </button>
+      </div>
+    </div>
+  </nav>

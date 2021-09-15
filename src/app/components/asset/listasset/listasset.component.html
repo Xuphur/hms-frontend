@@ -1,0 +1,94 @@
+<div class="card shadow rounded">
+    <div class="card-header shadow rounded">
+        <h3>Asset List</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <input [(ngModel)]="title" class="search" type="text" name="" placeholder="Search By Title" (change)="search(title)" />
+                <button type="button" class="btn-search" (click)="search(title)">
+        <i class="fas fa-angle-down"></i>
+      </button>
+            </div>
+            <div class="col">
+                <input [(ngModel)]="owner" class="search" type="text" name="" placeholder="Search By Owner" (change)="searchByOwner(owner)" />
+                <button type="button" class="btn-search" (click)="searchByOwner(owner)">
+        <i class="fas fa-angle-down"></i>
+      </button>
+            </div>
+            <div class="col">
+                <input [(ngModel)]="type" class="search" type="text" name="" placeholder="Search By type" (change)="searchByType(type)" />
+                <button type="button" class="btn-search" (click)="searchByType(type)">
+        <i class="fas fa-angle-down"></i>
+      </button>
+            </div>
+            <div class="col float-right newbox">
+                <button class="btn btn-primary btn-circle" (click)="open()">
+        <i class="fa fa-plus"></i>
+      </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card shadow rounded">
+    <div class="card-body">
+        <table>
+            <thead>
+                <th>Title &nbsp; <i class="fas fa-sort"></i></th>
+                <th>Type&nbsp;<i class="fas fa-sort"></i></th>
+                <th>Owner Name&nbsp;<i class="fas fa-sort"></i></th>
+                <th>Owner Contact&nbsp;<i class="fas fa-sort"></i></th>
+                <th>Owner CNIC&nbsp;<i class="fas fa-sort"></i></th>
+                <th>Actions</th>
+                <!-- <th>Owner Address</th> -->
+            </thead>
+
+            <tbody *ngFor="
+          let asset of (assetlist
+            | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize)
+        ">
+                <td>{{ asset?.title | titlecase }}</td>
+                <td>{{ asset?.assetType | titlecase}}</td>
+                <td>{{ asset?.owner?.name | titlecase}}</td>
+                <td>{{ asset?.owner?.mobile1 }}</td>
+                <td>{{ asset?.owner?.cnic }}</td>
+                <td>
+                    &nbsp;<button class="btn btn-sm btn-outline-warning" (click)="edit(asset._id)">
+          <i class="fas fa-edit"></i> Edit</button
+          >&nbsp; &nbsp;
+          <button
+            class="btn btn-sm btn-outline-danger"
+            (click)="deleteAsset(asset._id)"
+          >
+            <i class="far fa-trash-alt"></i> Delete</button
+          >&nbsp; &nbsp;
+          <button
+            class="btn btn-sm btn-outline-success"
+            (click)="viewAsset(asset._id)"
+          >
+            <i class="far fa-eye"></i> View
+          </button>
+                </td>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="card-footer">
+    <div class="row">
+        <div class="col-2">
+            <label for="pageSize">Show Rows</label>
+            <select [(ngModel)]="pageSize" type="text" name="pageSize" id="pageSize">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+        </select>
+        </div>
+
+        <div class="col-10">
+            <ngb-pagination class="d-flex justify-content-end" [(page)]="page" [pageSize]="pageSize" [collectionSize]="assetlist.length" [maxSize]="5">
+            </ngb-pagination>
+        </div>
+    </div>
+
+
+</div>

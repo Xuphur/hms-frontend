@@ -1,0 +1,74 @@
+<div class="card">
+  <div class="card-header">
+    <h2>New Reciept</h2>
+  </div>
+
+  <form>
+    <div class="col">
+      <label for="date">Date</label>
+      <input
+        [(ngModel)]="reciept.recieptDate"
+        type="date"
+        name="date"
+        id="date"
+      />
+    </div>
+
+    <div class="col">
+      <label for="recieptNumber">Reciept Number</label>
+      <input
+        [(ngModel)]="reciept.recieptNumber"
+        type="number"
+        name="recieptNumber"
+        id="recieptNumber"
+      />
+    </div>
+
+    <div class="col">
+      <label for="amount">Recived Amount</label>
+      <input
+        [(ngModel)]="reciept.recivedAmount"
+        type="number"
+        name="amount"
+        id="amount"
+      />
+    </div>
+
+    <div class="col">
+      <label for="paymentMethod">Payment Method</label>&nbsp;
+      <select
+        [(ngModel)]="reciept.paymentMethod"
+        type="text"
+        name="paymentMethod"
+        id="paymentMethod"
+      >
+        <option value="1">Cash</option>
+        <option value="2">Cheque</option>
+        <option value="3">On-Line</option>
+      </select>
+    </div>
+
+    <div class="col" *ngIf="reciept.paymentMethod > '1'">
+      <label for="amount">Transaction ID</label>
+      <input [(ngModel)]="reciept.trId" type="number" name="trId" id="trId" />
+    </div>
+
+    <div class="card-footer float-right">
+      <button
+        type="submit"
+        (click)="close()"
+        class="btn btn-sm btn-outline-danger"
+      >
+        Exit
+      </button>
+      &nbsp;
+      <button
+        type="submit"
+        (click)="addReciept(reciept)"
+        class="btn btn-sm btn-outline-primary"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+</div>

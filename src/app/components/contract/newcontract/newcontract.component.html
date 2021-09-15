@@ -1,0 +1,159 @@
+<div class="card shadow rounded">
+    <div class="card-header shadow rounded">
+        <div class="row">
+            <div class="col">
+                <h3 class="aligncontract">New Contract</h3>
+            </div>
+            <div class="col">
+                <div class="close">
+                    <button class="btn-circle" (click)="close()">
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                      </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form>
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-md-4">
+                    <label for="status">Sale Type</label>
+                    <select [(ngModel)]="contract.saleType" type="text" name="saleType" id="saleType" class="form-control">
+                      <option value="1">Counter</option>
+                      <option value="2">Rented</option>
+                      <option value="3">Installment</option>
+                      </select>
+                </div>
+
+                <div class="col-6 col-md-4">
+                    <label for="Select Customer">Select Customer</label>
+                    <select [(ngModel)]="contract.customer" type="text" name="customer" id="customer" class="form-control" placeholder="" (click)="fetchCustomers()">
+                      <option value="{{ customer?._id }}" *ngFor="let customer of customerlist">
+                        {{ customer?.customer?.name }}</option>
+                      </select>
+                </div>
+
+                <div class="col-6 col-md-4">
+                    <label for="Select Asset">Select Asset</label>
+                    <select [(ngModel)]="contract.asset" type="text" name="asset" id="asset" class="form-control" placeholder="" (click)="fetchAssets()">
+                      <option value="{{ asset?._id }}" *ngFor="let asset of assetlist">{{
+                      asset?.title
+                      }}</option>
+                      </select>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="this.contract.saleType > 1">
+                <div class="col-6 col-md-4">
+                    <label for="contractDate">Contract Date</label>
+                    <input [(ngModel)]="contract.contractDate" type="date" name="contractDate" id="contractDate" class="form-control" placeholder="" />
+                </div>
+
+                <div class="col-6 col-md-4">
+                    <label for="startDate">Contract Start Date</label>
+                    <input [(ngModel)]="contract.startDate" type="date" name="startdate" id="startDate" class="form-control" placeholder="" (change)="getExpiry()" />
+                </div>
+
+                <div class="col-6 col-md-4">
+                    <label for="duration">Contract Duration</label>
+                    <select [(ngModel)]="contract.duration" type="text" name="asset" id="asset" class="form-control" placeholder="" (change)="getExpiry()">
+                      <option value="12">1 Year</option>
+                      <option value="6">6 Months</option>
+                      <option value="1">Month</option>
+                      <option value="weekly">Week</option>
+                      <option value="daily">Day</option>
+                      </select>
+                </div>
+
+                <div class="col-6 col-md-4">
+                    <label for="expiry">Expiry Date</label>
+                    <input [(ngModel)]="contract.expiryDate" type="date" name="expiry" id="expiry" class="form-control" placeholder="" />
+                </div>
+
+                <div class="col-6 col-md-4" *ngIf="this.editMode === true">
+                    <label for="cancelation">Cancelation Date</label>
+                    <input [(ngModel)]="contract.cancelation" type="date" name="cancelation" id="cancelation" class="form-control" placeholder="" />
+                </div>
+
+                <div class="col-6 col-md-4">
+                    <label for="priceQuoted">Price Quoted</label>
+                    <input [(ngModel)]="contract.priceQuoted" type="number" name="priceQuoted" id="priceQuoted" class="form-control" placeholder="" (change)="calculate()" />
+                </div>
+
+                <div class="col-6 col-md-4">
+                    <label for="increment">Increment %</label>
+                    <input [(ngModel)]="contract.increment" type="text" name="increament" id="increment" class="form-control" placeholder="" />
+                </div>
+
+                <div class="col-6 col-md-4">
+                    <label for="incrementSchedule">Increment Schedule</label>
+                    <select [(ngModel)]="contract.incrementSchedule" type="text" name="incrementSchedule" id="incrementSchedule" class="form-control" placeholder="Increment Schedule">
+                      <option value="1">Annual</option>
+                      <option value="2">6 Months</option>
+                      <option value="3">Monthly</option>
+                      </select>
+                </div>
+
+                <div class="col-6 col-md-4">
+                    <label for="method">Payment Schedule</label>
+                    <select [(ngModel)]="contract.paymentMethod" type="text" name="method" id="method" class="form-control" placeholder="Payment Schedule" (change)="calculate()">
+                      <option value="12" *ngIf="contract.duration > 6">Annual</option>
+                      <option value="6" *ngIf="contract.duration > 1">6 Months</option>
+                      <option value="1">Monthly</option>
+                      <option value="weekly">Weekly</option>
+                      <option value="daily">Daily</option>
+                      </select>
+                </div>
+
+                <div class="col-6 col-md-4" *ngIf="contract.saleType > 2">
+                    <label for="downPayment">Down Payment</label>
+                    <input [(ngModel)]="contract.downPayment" type="number" name="downPayment" id="downPayment" class="form-control" placeholder="" (change)="calculate()" />
+                </div>
+
+                <div class="col-6 col-md-4">
+                    <label for="avdancePayment">Advance Payment</label>
+                    <input [(ngModel)]="contract.advancePayment" type="number" name="advancePayment" id="advancePayment" class="form-control" placeholder="" (change)="calculate()" />
+                </div>
+
+                <div class="col-6 col-md-4">
+                    <label for="status">Contract Status</label>
+                    <select [(ngModel)]="contract.status" type="text" name="status" id="status" class="form-control" placeholder="">
+                      <option value="Open">Open</option>
+                      <option value="Canceled">Canceled</option>
+                      <option value="Expired">Expired</option>
+                      </select>
+                </div>
+
+                <div class="col-6 col-md-4">
+                    <label for="installment">Installment / Rent</label>
+                    <input [(ngModel)]="contract.installment" type="number" name="installment" id="installment" class="form-control" placeholder="Installment / Rent" />
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4" *ngIf="contract.saleType > 0">
+                <label for="totalPayable">Total Payable</label>
+                <input [(ngModel)]="contract.totalPayable" type="number" name="totalPayable" id="totalPayable" class="form-control" placeholder="" />
+            </div>
+
+            <hr />
+        </div>
+        <div class="center">
+
+            <button type="submit" (click)="getNxt(contract)" class="btn btn-success">
+            Get Nxt
+            </button>
+            <button type="submit" (click)="addContract(contract)" class="btn btn-success">
+            Save
+            </button>
+            <button type="submit" (click)="openCustomer()" class="btn btn-primary">
+                Create Customer
+                </button>
+            <button type="submit" (click)="openAsset()" class="btn btn-warning">
+                Create Asset
+                </button>
+            <button type="submit" (click)="close()" class="btn btn-danger">
+                Cancel
+                </button>
+        </div>
+    </form>
+</div>
