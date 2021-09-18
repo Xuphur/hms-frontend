@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AmsService } from '../../../ams.service';
+import { HmsService } from '../../../hms.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Asset } from 'src/app/asset.model';
@@ -18,7 +18,7 @@ export class NewassetComponent implements OnInit {
   activeIdString: String = '';
   closeResult: string;
   constructor(
-    private amsService: AmsService,
+    private hmsService: HmsService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
@@ -31,28 +31,28 @@ export class NewassetComponent implements OnInit {
     this.asset = new Asset();
     this.route.paramMap.subscribe(parameterMap => {
       const id = parameterMap.get('id');
-      this.amsService.getAssetById(id);
+      this.hmsService.getAssetById(id);
     });
   }
   ngOnInit() {
-    if (this.amsService.editMode) {
+    if (this.hmsService.editMode) {
       this.fetchAssetById();
     }
   }
 
   fetchAssetById() {
-    this.amsService
-    .getAssetById(this.amsService.Id)
+    this.hmsService
+    .getAssetById(this.hmsService.Id)
     .subscribe((res: any) => {
       this.asset = res.data;
-      console.log(this.amsService.Id, 'asset at view');
+      console.log(this.hmsService.Id, 'asset at view');
     });
   }
 
   addAsset(asset) {
     console.log(asset, 'this is new asset');
-    if (this.amsService.editMode === true) {
-      this.amsService.updateAsset(asset).subscribe(() => {
+    if (this.hmsService.editMode === true) {
+      this.hmsService.updateAsset(asset).subscribe(() => {
         Swal(
           'Assest Updated Successfully'
         );
@@ -60,7 +60,7 @@ export class NewassetComponent implements OnInit {
         this.close();
       });
     } else {
-      this.amsService.addAsset(asset).subscribe(() => {
+      this.hmsService.addAsset(asset).subscribe(() => {
         Swal(
           'Assest Inserted Successfully'
         );

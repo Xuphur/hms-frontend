@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AmsService } from 'src/app/ams.service';
+import { HmsService } from 'src/app/hms.service';
 import {
   NgbModal,
   NgbActiveModal,
@@ -18,7 +18,7 @@ export class ViewassetComponent implements OnInit {
   //  item: Boolean = true;
   constructor(
     public activeModal: NgbActiveModal,
-    private amsService: AmsService
+    private hmsService: HmsService
   ) {}
 
   ngOnInit() {
@@ -26,9 +26,9 @@ export class ViewassetComponent implements OnInit {
   }
 
   fetchAssetById() {
-    this.amsService.getAssetById(this.amsService.Id).subscribe((res: any) => {
+    this.hmsService.getAssetById(this.hmsService.Id).subscribe((res: any) => {
       this.asset = res.data;
-      console.log(this.amsService.Id, this.asset, 'asset at view');
+      console.log(this.hmsService.Id, this.asset, 'asset at view');
     });
   }
   close() {

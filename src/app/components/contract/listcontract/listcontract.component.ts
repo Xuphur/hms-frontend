@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AmsService } from 'src/app/ams.service';
+import { HmsService } from 'src/app/hms.service';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NewcontractComponent } from '../newcontract/newcontract.component';
@@ -23,7 +23,7 @@ export class ListcontractComponent implements OnInit {
   public isCollapsed = true;
 
   constructor(
-    private amsService: AmsService,
+    private hmsService: HmsService,
     private router: Router,
     private modalService: NgbModal
   ) {
@@ -36,14 +36,14 @@ export class ListcontractComponent implements OnInit {
   }
 
   fetchContracts() {
-    this.amsService.getContracts().subscribe(data => {
+    this.hmsService.getContracts().subscribe(data => {
       this.contractlist = data;
       console.log('all contract found', data);
     });
   }
 
   open() {
-    this.amsService.editMode = false;
+    this.hmsService.editMode = false;
     const modalRef = this.modalService.open(NewcontractComponent, {
       size: 'lg',
       backdrop: 'static'
@@ -53,7 +53,7 @@ export class ListcontractComponent implements OnInit {
 
   viewContract(_id) {
     console.log(_id, 'this is contract id');
-    this.amsService.Id = _id;
+    this.hmsService.Id = _id;
     const modalRef = this.modalService.open(ViewcontractComponent, {
       size: 'lg',
       backdrop: 'static'
@@ -63,9 +63,9 @@ export class ListcontractComponent implements OnInit {
   }
 
   edit(_id) {
-    this.amsService.Id = _id;
-    this.amsService.editMode = true;
-    console.log(this.amsService.Id, 'got this contract');
+    this.hmsService.Id = _id;
+    this.hmsService.editMode = true;
+    console.log(this.hmsService.Id, 'got this contract');
     const modalRef = this.modalService.open(NewcontractComponent, {
       size: 'lg',
       backdrop: 'static'
@@ -78,7 +78,7 @@ export class ListcontractComponent implements OnInit {
     if (status === '') {
       this.fetchContracts();
     } else {
-      this.amsService.getContractByStatus(status).subscribe((res: any) => {
+      this.hmsService.getContractByStatus(status).subscribe((res: any) => {
         this.contractlist = res.data;
         console.log('all contract found by status', this.contractlist);
       });
@@ -105,14 +105,14 @@ export class ListcontractComponent implements OnInit {
 
   searchByType(type) {
     console.log(type, 'this is owner at search');
-    this.amsService.getAssetByType(type).subscribe((res: any) => {
+    this.hmsService.getAssetByType(type).subscribe((res: any) => {
       this.contractlist = res.data;
       console.log('all asset found by Owner', this.contractlist);
     });
   }
 
   deleteContract(_id) {
-    this.amsService.deleteContract(_id).subscribe(() => {
+    this.hmsService.deleteContract(_id).subscribe(() => {
       this.fetchContracts();
       console.log('delete click');
     });
@@ -120,7 +120,7 @@ export class ListcontractComponent implements OnInit {
 
   addReciept(_id) {
     console.log(_id, 'this is asset id');
-    this.amsService.Id = _id;
+    this.hmsService.Id = _id;
     const modalRef = this.modalService.open(NewrecieptComponent, {
       size: 'lg',
       backdrop: 'static'
@@ -129,8 +129,8 @@ export class ListcontractComponent implements OnInit {
   }
 
   listReciept(_id) {
-    this.amsService.Id = _id;
-    console.log(this.amsService.Id, 'this asset Called');
+    this.hmsService.Id = _id;
+    console.log(this.hmsService.Id, 'this asset Called');
     const modalRef = this.modalService.open(ListrecieptComponent, {
       size: 'lg',
       backdrop: 'static'

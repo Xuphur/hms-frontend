@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Contract } from 'src/app/contract.model';
-import { AmsService } from 'src/app/ams.service';
+import { HmsService } from 'src/app/hms.service';
 import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert';
@@ -21,7 +21,7 @@ import {
 export class NewcontractComponent implements OnInit {
 
   contract: any;
-  editMode = this.amsService.editMode;
+  editMode = this.hmsService.editMode;
   customerlist: any;
   assetlist: any;
   total: any;
@@ -31,7 +31,7 @@ export class NewcontractComponent implements OnInit {
   instArray = [];
 
   constructor(
-    private amsService: AmsService,
+    private hmsService: HmsService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
@@ -41,12 +41,12 @@ export class NewcontractComponent implements OnInit {
     this.contract = new Contract();
     this.route.paramMap.subscribe(parameterMap => {
       const id = parameterMap.get('id');
-      this.amsService.getContractById(id);
+      this.hmsService.getContractById(id);
     });
   }
 
   ngOnInit() {
-    if (this.amsService.editMode) {
+    if (this.hmsService.editMode) {
       this.fetchContractById();
     } else {
       this.fetchAssets();
@@ -55,23 +55,23 @@ export class NewcontractComponent implements OnInit {
   }
 
   fetchContractById() {
-    this.amsService
-      .getContractById(this.amsService.Id)
+    this.hmsService
+      .getContractById(this.hmsService.Id)
       .subscribe((res: any) => {
         this.contract = res.data;
-        console.log(this.amsService.Id, this.contract, 'contract at view');
+        console.log(this.hmsService.Id, this.contract, 'contract at view');
       });
   }
 
   fetchCustomers() {
-    this.amsService.getCustomers().subscribe(data => {
+    this.hmsService.getCustomers().subscribe(data => {
       this.customerlist = data;
       console.log('all customer found', data);
     });
   }
 
   fetchAssets() {
-    this.amsService.getAssets().subscribe(data => {
+    this.hmsService.getAssets().subscribe(data => {
       this.assetlist = data;
       console.log('all customer found', data);
     });
@@ -200,7 +200,7 @@ export class NewcontractComponent implements OnInit {
   }
 
   addContract(contract) {
-    this.amsService.addContract(contract).subscribe(() => {
+    this.hmsService.addContract(contract).subscribe(() => {
       Swal('Contract Inserted Successfully');
       this.router.navigate(['/contract/list']);
       this.close();

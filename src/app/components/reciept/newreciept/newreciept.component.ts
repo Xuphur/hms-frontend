@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AmsService } from '../../../ams.service';
+import { HmsService } from '../../../hms.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Reciept } from 'src/app/reciept.model';
@@ -14,7 +14,7 @@ export class NewrecieptComponent implements OnInit {
   reciept: Reciept;
 
   constructor(
-    private amsService: AmsService,
+    private hmsService: HmsService,
     private fb: FormBuilder,
     private router: Router,
     private modalService: NgbModal,
@@ -27,9 +27,9 @@ export class NewrecieptComponent implements OnInit {
 
   addReciept(reciept) {
     console.log(reciept, 'this is new reciept');
-    reciept.contractId = this.amsService.Id;
-    console.log(this.amsService.Id, 'receipt is');
-    this.amsService.addReciept(reciept).subscribe(() => {
+    reciept.contractId = this.hmsService.Id;
+    console.log(this.hmsService.Id, 'receipt is');
+    this.hmsService.addReciept(reciept).subscribe(() => {
       this.router.navigate(['/']);
       this.close();
     });

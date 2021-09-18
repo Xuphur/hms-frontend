@@ -5,10 +5,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Injectable({
   providedIn: 'root'
 })
-export class AmsService {
+export class HmsService {
   Id: String;
   editMode: Boolean = false;
   isLoggIn: Boolean = true;
+  
   url = 'http://localhost:4000';
   //  url = 'https://ams-backend.herokuapp.com';
 

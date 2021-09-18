@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Contract } from 'src/app/contract.model';
-import { AmsService } from 'src/app/ams.service';
+import { HmsService } from 'src/app/hms.service';
 import {
   NgbModal,
   NgbActiveModal,
@@ -15,18 +15,18 @@ export class ViewcontractComponent implements OnInit {
   contract: any;
   constructor(
     public activeModal: NgbActiveModal,
-    private amsService: AmsService
+    private hmsService: HmsService
   ) {}
 
   ngOnInit() {
     this.fetchContractById();
   }
   fetchContractById() {
-    this.amsService
-      .getContractById(this.amsService.Id)
+    this.hmsService
+      .getContractById(this.hmsService.Id)
       .subscribe((res: any) => {
         this.contract = res.data;
-        console.log(this.amsService.Id, this.contract, 'contract at view');
+        console.log(this.hmsService.Id, this.contract, 'contract at view');
       });
   }
 

@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListassetComponent } from './components/asset/listasset/listasset.component';
 
-import { AmsService } from './ams.service';
+import { HmsService } from './hms.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -76,7 +76,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ListcontractComponent,
     ViewcontractComponent
   ],
-  providers: [AmsService, AuthguardService],
+  providers: [HmsService, AuthguardService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

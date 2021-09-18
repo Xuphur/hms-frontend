@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from 'src/app/customer.model';
-import { AmsService } from 'src/app/ams.service';
+import { HmsService } from 'src/app/hms.service';
 import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert';
@@ -14,7 +14,7 @@ export class NewcustomerComponent implements OnInit {
   customer: Customer;
 
   constructor(
-    private amsService: AmsService,
+    private hmsService: HmsService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
@@ -24,28 +24,28 @@ export class NewcustomerComponent implements OnInit {
     this.customer = new Customer();
     this.route.paramMap.subscribe(parameterMap => {
       const id = parameterMap.get('id');
-      this.amsService.getCustomerById(id);
+      this.hmsService.getCustomerById(id);
     });
   }
 
   ngOnInit() {
-    if (this.amsService.editMode) {
+    if (this.hmsService.editMode) {
       this.fetchCustomerById();
     }
   }
 
   fetchCustomerById() {
-    this.amsService
-      .getCustomerById(this.amsService.Id)
+    this.hmsService
+      .getCustomerById(this.hmsService.Id)
       .subscribe((res: any) => {
         this.customer = res.data;
-        console.log(this.amsService.Id, 'customer at edit');
+        console.log(this.hmsService.Id, 'customer at edit');
       });
   }
 
   addCustomer(customer) {
     console.log(customer, 'this is new asset'),
-    this.amsService.addCustomer(customer).subscribe(() => {
+    this.hmsService.addCustomer(customer).subscribe(() => {
       Swal(
         'Customer Inserted Successfully'
       );

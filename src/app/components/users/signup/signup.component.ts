@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/user.model';
 import Swal from 'sweetalert';
-import { AmsService } from 'src/app/ams.service';
+import { HmsService } from 'src/app/hms.service';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -16,14 +16,14 @@ export class SignupComponent implements OnInit {
 
 
   constructor(
-    private amsService: AmsService,
+    private hmsService: HmsService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
   ) {
     this.user = new User();
     this.route.paramMap.subscribe(parameterMap => {
       const id = parameterMap.get('id');
-      this.amsService.getUserById(id);
+      this.hmsService.getUserById(id);
     });
   }
 
@@ -32,7 +32,7 @@ export class SignupComponent implements OnInit {
 
   save(user) {
     console.log(user, 'this is new asset'),
-      this.amsService.addUser(user).subscribe(() => {
+      this.hmsService.addUser(user).subscribe(() => {
         Swal(
           'Assest Inserted Successfully'
         );

@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Asset } from '../../../asset.model';
-import { AmsService } from '../../../ams.service';
+import { HmsService } from '../../../hms.service';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { NewassetComponent } from './../newasset/newasset.component';
@@ -25,7 +25,7 @@ export class ListassetComponent implements OnInit {
   public isCollapsed = true;
 
   constructor(
-    private amsService: AmsService,
+    private hmsService: HmsService,
     private router: Router,
     private modalService: NgbModal
   ) {
@@ -37,7 +37,7 @@ export class ListassetComponent implements OnInit {
   }
 
   fetchAssets() {
-    this.amsService
+    this.hmsService
     .getAssets()
     .subscribe(data => {
       this.assetlist = data;
@@ -46,8 +46,8 @@ export class ListassetComponent implements OnInit {
   }
 
   edit(_id) {
-    this.amsService.Id = _id;
-    this.amsService.editMode = true;
+    this.hmsService.Id = _id;
+    this.hmsService.editMode = true;
     console.log(_id, 'this is asset id');
       const modalRef = this.modalService.open(NewassetComponent, { size: 'lg', backdrop : 'static'  });
       modalRef.componentInstance.name = 'Update Asset';
@@ -58,7 +58,7 @@ export class ListassetComponent implements OnInit {
       this.fetchAssets();
     } else {
       console.log(title, 'this is title at search');
-      this.amsService
+      this.hmsService
       .getAsset(title)
       .subscribe((res: any) => {
         this.assetlist = res.data;
@@ -72,7 +72,7 @@ export class ListassetComponent implements OnInit {
       this.fetchAssets();
     } else {
     console.log(owner, 'this is owner at search');
-    this.amsService
+    this.hmsService
     .getAssetByOwner(owner)
     .subscribe((res: any) => {
       this.assetlist = res.data;
@@ -86,7 +86,7 @@ export class ListassetComponent implements OnInit {
       this.fetchAssets();
     } else {
     console.log(type, 'this is owner at search');
-    this.amsService
+    this.hmsService
     .getAssetByType(type)
     .subscribe((res: any) => {
       this.assetlist = res.data;
@@ -96,22 +96,22 @@ export class ListassetComponent implements OnInit {
   }
 
   deleteAsset(_id) {
-    this.amsService.deleteAsset(_id).subscribe(() => {
+    this.hmsService.deleteAsset(_id).subscribe(() => {
       this.fetchAssets();
     console.log('delete click');
     });
   }
 
   open() {
-    this.amsService.editMode = false;
-    this.amsService.Id = null;
+    this.hmsService.editMode = false;
+    this.hmsService.Id = null;
     const modalRef = this.modalService.open(NewassetComponent, { size: 'lg', backdrop : 'static'  });
     modalRef.componentInstance.name = 'New Asset';
   }
 
   viewAsset(_id) {
     console.log(_id, 'this is asset id');
-    this.amsService.Id = _id;
+    this.hmsService.Id = _id;
       const modalRef = this.modalService.open(ViewassetComponent, { size: 'lg', backdrop : 'static'  });
       modalRef.componentInstance.asset = _id;
     console.log('view asset open');

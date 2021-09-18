@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AmsService } from 'src/app/ams.service';
+import { HmsService } from 'src/app/hms.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/user.model';
 import swal from 'sweetalert';
@@ -8,7 +8,7 @@ import { AuthguardService } from 'src/app/authguard.service';
   selector: 'app-login-in',
   templateUrl: './login-in.component.html',
   styleUrls: ['./login-in.component.css'],
-  providers: [AmsService]
+  providers: [HmsService]
 })
 export class LoginInComponent implements OnInit {
 
@@ -19,12 +19,12 @@ export class LoginInComponent implements OnInit {
     private authService: AuthguardService,
     private route: ActivatedRoute,
     private router: Router,
-    private amsService: AmsService,
+    private hmsService: HmsService,
     ) {
       this.user = new User();
       this.route.paramMap.subscribe(parameterMap => {
         const id = parameterMap.get('id');
-        this.amsService.getUserById(id);
+        this.hmsService.getUserById(id);
       });
     }
 
@@ -32,7 +32,7 @@ export class LoginInComponent implements OnInit {
   }
 
   getuser(user) {
-    this.amsService.getUser(user).subscribe((loginData) => {
+    this.hmsService.getUser(user).subscribe((loginData) => {
       localStorage.setItem('loginvalue', JSON.stringify(loginData));
       // this.authService.isLoggIn = true;
       this.router.navigate(['/asset/list']);

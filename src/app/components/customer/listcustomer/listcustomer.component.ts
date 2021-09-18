@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AmsService } from 'src/app/ams.service';
+import { HmsService } from 'src/app/hms.service';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NewcustomerComponent } from '../newcustomer/newcustomer.component';
@@ -20,7 +20,7 @@ export class ListcustomerComponent implements OnInit {
   public isCollapsed = true;
 
   constructor(
-    private amsService: AmsService,
+    private amsService: HmsService,
     private router: Router,
     private modalService: NgbModal
   ) {}

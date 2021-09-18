@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AmsService } from '../../ams.service';
+import { HmsService } from '../../hms.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 
@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
   thisArray = [];
 
   constructor(
-    private amsService: AmsService,
+    private hmsService: HmsService,
     private spinner: NgxSpinnerService,
     private router: Router
   ) {
@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchContracts() {
-    this.amsService.getContracts().subscribe(data => {
+    this.hmsService.getContracts().subscribe(data => {
       this.contractlist = data;
       console.log('all contract found', data);
       this.searchByMonth(this.month);
@@ -65,7 +65,7 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchReciept() {
-    this.amsService
+    this.hmsService
       .getReciept()
       .subscribe((data: any) => {
         this.recieptlist = data.data;

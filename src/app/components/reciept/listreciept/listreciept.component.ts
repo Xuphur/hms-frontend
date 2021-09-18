@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AmsService } from '../../../ams.service';
+import { HmsService } from '../../../hms.service';
 import { Router } from '@angular/router';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -16,7 +16,7 @@ export class ListrecieptComponent implements OnInit {
   contract: any;
 
   constructor(
-    private amsService: AmsService,
+    private HmsService: HmsService,
     private router: Router,
     private modalService: NgbModal,
     public activeModal: NgbActiveModal
@@ -28,15 +28,15 @@ export class ListrecieptComponent implements OnInit {
   }
 
   fetchReciept() {
-    this.amsService
-      .getRecieptById(this.amsService.Id)
+    this.HmsService
+      .getRecieptById(this.HmsService.Id)
       .subscribe((data: any) => {
         this.recieptlist = data.data;
         const total = this.getTotal(this.recieptlist);
         this.grandTotal = total;
         console.log(this.recieptlist, 'this is reciept data');
-        this.amsService
-          .getContractById(this.amsService.Id)
+        this.HmsService
+          .getContractById(this.HmsService.Id)
           .subscribe((con: any) => {
             this.contract = con.data;
             const blnc = this.contract.totalPayable - this.grandTotal;
@@ -69,11 +69,11 @@ export class ListrecieptComponent implements OnInit {
   // }
 
   fetchContractById() {
-    this.amsService
-      .getContractById(this.amsService.Id)
+    this.HmsService
+      .getContractById(this.HmsService.Id)
       .subscribe((data: any) => {
         this.contract = data.data;
-        console.log(this.amsService.Id, this.contract, 'got this asset');
+        console.log(this.HmsService.Id, this.contract, 'got this asset');
       });
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AmsService } from '../../../ams.service';
+import { HmsService } from '../../../hms.service';
 import * as XLSX from 'xlsx';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
@@ -24,7 +24,7 @@ export class MainComponent implements OnInit {
   isCollapsed = true;
 
   constructor(
-    private amsService: AmsService,
+    private hmsService: HmsService,
     private spinner: NgxSpinnerService,
     private router: Router
   ) {
@@ -88,7 +88,7 @@ export class MainComponent implements OnInit {
   }
 
   fetchContracts() {
-    this.amsService.getContracts().subscribe(data => {
+    this.hmsService.getContracts().subscribe(data => {
       this.contractlist = data;
       console.log('all contract found', data);
       this.searchByMonth(this.month);
@@ -99,7 +99,7 @@ export class MainComponent implements OnInit {
     for (let i = 0; i < this.objects.length; i++) {
       // console.log(this.objects[i], 'this is one object');
       const reciept = this.objects[i];
-      this.amsService.addReciept(reciept).subscribe(() => {
+      this.hmsService.addReciept(reciept).subscribe(() => {
       console.log(reciept, 'this is saved reciept');
       });
     }
@@ -108,7 +108,7 @@ export class MainComponent implements OnInit {
     for (let i = 0; i < this.objects.length; i++) {
       // console.log(this.objects[i], 'this is one object');
       const asset = this.objects[i];
-      this.amsService.addAsset(asset).subscribe(() => {
+      this.hmsService.addAsset(asset).subscribe(() => {
       console.log(asset, 'this is saved asset');
       });
     }
@@ -117,7 +117,7 @@ export class MainComponent implements OnInit {
     for (let i = 0; i < this.objects.length; i++) {
       // console.log(this.objects[i], 'this is one object');
       const customer = this.objects[i];
-      this.amsService.addCustomer(customer).subscribe(() => {
+      this.hmsService.addCustomer(customer).subscribe(() => {
       console.log(customer, 'this is saved customer');
       });
     }
@@ -126,7 +126,7 @@ export class MainComponent implements OnInit {
     for (let i = 0; i < this.objects.length; i++) {
       // console.log(this.objects[i], 'this is one object');
       const contract = this.objects[i];
-      this.amsService.addContract(contract).subscribe(() => {
+      this.hmsService.addContract(contract).subscribe(() => {
       console.log(contract, 'this is saved contract');
       });
     }
