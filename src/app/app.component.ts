@@ -9,9 +9,10 @@ export class AppComponent {
   isLoggIn: any;
 
   constructor(private authService: AuthguardService) {
-    // this.isLoggIn = this.authService.isLoggedIn();
+    this.isLoggIn = this.authService.isLoggedIn();
+    console.log(this.isLoggIn);
   }
 
-  title = 'Asset Management System';
+  title = 'Hotel Management System';
   logincheck = '';
 }

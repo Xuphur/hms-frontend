@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { HmsService } from '../../../hms.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Asset } from 'src/app/asset.model';
-import {NgbModal, NgbActiveModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbActiveModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert';
 
 @Component({
@@ -15,38 +15,54 @@ export class NewassetComponent implements OnInit {
 
   number: any;
   asset: any;
+  obj: any;
+  detail = [];
   activeIdString: String = '';
   closeResult: string;
+
   constructor(
     private hmsService: HmsService,
-    private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private modalService: NgbModal,
     public activeModal: NgbActiveModal
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
     this.asset = new Asset();
+    this.asset.assetDetail = [];
     this.route.paramMap.subscribe(parameterMap => {
       const id = parameterMap.get('id');
       this.hmsService.getAssetById(id);
     });
   }
   ngOnInit() {
+    this.obj = new Asset
+    this.detail.push(this.obj);
     if (this.hmsService.editMode) {
       this.fetchAssetById();
     }
   }
 
+  cal(changes: SimpleChanges, obj: any) {
+    this.obj.itemTotal = this.obj.weight * this.obj.pricekg
+    console.log(this.obj.itemTotal)
+  }
+
   fetchAssetById() {
     this.hmsService
-    .getAssetById(this.hmsService.Id)
-    .subscribe((res: any) => {
-      this.asset = res.data;
-      console.log(this.hmsService.Id, 'asset at view');
-    });
+      .getAssetById(this.hmsService.Id)
+      .subscribe((res: any) => {
+        this.asset = res.data;
+        console.log(this.hmsService.Id, 'asset at view');
+      });
+  }
+
+  TabKey() {
+    this.obj = new Asset
+    this.detail.push(this.obj)
+    console.log(this.obj, "this is new asset detail")
+    // console.log(this.asset.assetDetail, 'tab key pressed');
   }
 
   addAsset(asset) {
@@ -60,6 +76,7 @@ export class NewassetComponent implements OnInit {
         this.close();
       });
     } else {
+      this.asset.assetDetail.push(this.detail);
       this.hmsService.addAsset(asset).subscribe(() => {
         Swal(
           'Assest Inserted Successfully'
@@ -73,5 +90,12 @@ export class NewassetComponent implements OnInit {
     this.activeModal.close();
   }
 
+  deleteAsset(i) {
+    if (i < 1 ) {
+      this.close();
+    } else {
+      this.detail.splice(i);
+    }
+  }
 }
 

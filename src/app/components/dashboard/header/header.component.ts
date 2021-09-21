@@ -11,5 +11,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  
+  logout() {
+    localStorage.removeItem('loginvalue');
+    window.location.reload();
+  }
 }

@@ -3,17 +3,17 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ListassetComponent } from './components/asset/listasset/listasset.component';
+import { ListassetComponent } from './components/stock/listStock/listasset.component';
 
 import { HmsService } from './hms.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { NewassetComponent } from './components/asset/newasset/newasset.component';
+import { NewassetComponent } from './components/stock/newStock/newasset.component';
 import { NewrecieptComponent } from './components/reciept/newreciept/newreciept.component';
 import { ListrecieptComponent } from './components/reciept/listreciept/listreciept.component';
-import { ViewassetComponent } from './components/asset/viewasset/viewasset.component';
+import { ViewassetComponent } from './components/stock/viewStock/viewasset.component';
 import { NewcustomerComponent } from './components/customer/newcustomer/newcustomer.component';
 import { ListcustomerComponent } from './components/customer/listcustomer/listcustomer.component';
 import { ViewcustomerComponent } from './components/customer/viewcustomer/viewcustomer.component';

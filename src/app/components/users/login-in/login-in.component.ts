@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/user.model';
 import swal from 'sweetalert';
 import { AuthguardService } from 'src/app/authguard.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SignupComponent } from '../signup/signup.component';
 @Component({
   selector: 'app-login-in',
   templateUrl: './login-in.component.html',
@@ -18,6 +20,7 @@ export class LoginInComponent implements OnInit {
   constructor(
     private authService: AuthguardService,
     private route: ActivatedRoute,
+    private modalService: NgbModal,
     private router: Router,
     private hmsService: HmsService,
     ) {
@@ -34,11 +37,19 @@ export class LoginInComponent implements OnInit {
   getuser(user) {
     this.hmsService.getUser(user).subscribe((loginData) => {
       localStorage.setItem('loginvalue', JSON.stringify(loginData));
-      // this.authService.isLoggIn = true;
-      this.router.navigate(['/asset/list']);
+      this.router.navigate(['']);
+      window.location.reload();
       swal(
         'User Log In Successfully'
       );
     });
   }
+
+  open() {
+    this.hmsService.editMode = false;
+    this.hmsService.Id = null;
+    const modalRef = this.modalService.open(SignupComponent, { size: 'lg', backdrop : 'static'  });
+    modalRef.componentInstance.name = 'New Asset';
+  }
+
 }

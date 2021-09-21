@@ -4,7 +4,7 @@ import { HmsService } from 'src/app/hms.service';
 import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert';
-import { NewassetComponent } from '../../asset/newasset/newasset.component';
+import { NewassetComponent } from '../../stock/newStock/newasset.component';
 import { NewcustomerComponent } from '../../customer/newcustomer/newcustomer.component';
 import * as moment from 'moment';
 import {

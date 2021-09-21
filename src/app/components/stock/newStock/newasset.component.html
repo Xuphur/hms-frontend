@@ -1,0 +1,277 @@
+<div class="card shadow rounded">
+    <div class="card-header shadow rounded">
+        <h3>New Stock</h3>
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+          </button>
+    </div>
+    <div class="card-body">
+        <form>
+            <label for="date">Date</label>
+            <input [(ngModel)]="asset.date" type="date" name="date" id="date" />
+            <table>
+                <thead>
+                    <th>Type &nbsp; <i class="fas fa-sort"></i></th>
+                    <th>Name&nbsp;<i class="fas fa-sort"></i></th>
+                    <th>Weight&nbsp;<i class="fas fa-sort"></i></th>
+                    <th>Unit Price&nbsp;<i class="fas fa-sort"></i></th>
+                    <th>Total&nbsp;<i class="fas fa-sort"></i></th>
+                    <th>Actions</th>
+                    <!-- <th>Owner Address</th> -->
+                </thead>
+
+                <tbody>
+                    <!-- <tr *ngFor="let ojb of asset.assetDetail; let i=index">
+                        <td>
+                            <span>{{obj.type}}</span>
+                        </td>
+                        <td>
+                            <span>{{obj.name}}</span>
+                        </td>
+                    </tr> -->
+                    <tr #detail *ngFor="let obj of detail; let i=index">
+                        <td>
+                            <!-- <label for="obj.type">Select Type</label> -->
+                            <select [(ngModel)]="obj.type" type="text" name="assetType{{i}}" id="assetType">
+                          <option value="1">Meat</option>
+                          <option value="2">Chiken</option>
+                          <option value="3">Vegitable</option>
+                          <option value="4">Grocery</option>
+                          <option value="5">Crockery</option>
+                          </select>
+                        </td>
+                        <td>
+                            <!-- <label for="obj.name">Name</label> -->
+                            <input [(ngModel)]="obj.name" type="text" name="name{{i}}" id="name" />
+                        </td>
+                        <td>
+                            <!-- <label for="obj.weight">Weight</label> -->
+                            <input [(ngModel)]="obj.weight" type="number" name="weight{{i}}" id="weight" (ngModelChange)="cal(obj)" />
+                        </td>
+                        <td>
+                            <!-- <label for="obj.pricekg">Price Kg</label> -->
+                            <input [(ngModel)]="obj.pricekg" type="number" name="pricekg{{i}}" id="pricekg" (keydown.tab)='TabKey(obj)' (ngModelChange)="cal(asset.assetDetail.pricekg)" />
+                        </td>
+                        <td>
+                            <!-- <label for="obj.itemTotal">Item Total</label> -->
+                            <output name="total{{i}}">{{obj.itemTotal}}</output>
+                            <!-- <input [(ngModel)]="asset.assetDetail.itemTotal" type="number" name="itemTotal" id="itemTotal" /> -->
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-danger" (click)="deleteAsset(i)">
+                          <i class="far fa-trash-alt"></i> Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <!-- <div class="container">
+                <div class="col-6 col-md-4">
+                    <label for="date">Date</label>
+                    <input [(ngModel)]="asset.date" type="date" name="date" id="date" />
+                </div>
+
+                <div class="row">
+                    <div class="col-6 col-md-4">
+                        <label for="assetType">Asset Type</label>
+                        <select [(ngModel)]="asset.assetType" type="text" name="assetType" id="assetType">
+                          <option value="veg">Vegitable</option>
+                          <option value="meat">Meat</option>
+                          <option value="chiken">Chiken</option>
+                          <option value="grocery">Grocery</option>
+                          <option value="crockery">Crockery</option>
+                          </select>
+                    </div>
+                </div>
+                <div class="row" *ngIf="this.asset.assetType == 'veg'">
+                    <div class="col-6 col-md-4">
+                        <label for="asset.assetType.veg.name">Veg Name</label>
+                        <select [(ngModel)]="asset.assetType.veg.name" type="text" name="asset.assetType.veg.name" id="asset.assetType.veg.name">
+                          <option value="onion">Onion</option>
+                          <option value="tomato">Tomato</option>
+                          <option value="Potato">Potato</option>
+                          <option value="garlic">Garlic</option>
+                          <option value="ginger">Ginger</option>
+                          </select>
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <label for="asset.assetType.veg.weight">Weight</label>
+                        <input [(ngModel)]="asset.assetType.veg.weight" type="number" name="weight" id="weight" />
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <label for="pricekg">Per KG</label>
+                        <input [(ngModel)]="asset.assetDetail.vehicle.pricekg" type="number" name="pricekg" id="pricekg" />
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <label for="total">Total</label>
+                        <input [(ngModel)]="asset.assetDetail.vehicle.year" type="text" name="year" id="year" />
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <label for="colour">Colour</label>
+                        <input [(ngModel)]="asset.assetDetail.vehicle.colour" type="text" name="colour" id="colour" />
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <label for="status">Status</label>
+                        <select [(ngModel)]="asset.assetDetail.vehicle.status" type="text" name="status" id="status">
+                          <option value="available">Available</option>
+                          <option value="on-trip">On-Trip</option>
+                          <option value="workshop">Workshop</option>
+                          </select>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="this.asset.assetType == 'house'">
+                    <div class="col-6 col-md-4">
+                        <label for="floor">Floor</label>
+                        <input [(ngModel)]="asset.assetDetail.house.address.floor" type="text" name="floor" id="floor" />
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <label for="number">House Number</label>
+                        <input [(ngModel)]="asset.assetDetail.house.address.number" type="text" name="number" id="number" />
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <label for="street">Street</label>
+                        <input [(ngModel)]="asset.assetDetail.house.address.street" type="text" name="street" id="street" />
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <label for="sector">Sector</label>
+                        <input [(ngModel)]="asset.assetDetail.house.address.sector" type="text" name="sector" id="sector" />
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <label for="city">City</label>
+                        <input [(ngModel)]="asset.assetDetail.house.address.city" type="text" name="city" id="city" />
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <label for="province">Province</label>
+                        <input [(ngModel)]="asset.assetDetail.house.address.province" type="text" name="province" id="province" />
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <label for="zipcode">Zip Code</label>
+                        <input [(ngModel)]="asset.assetDetail.house.address.zipcode" type="text" name="zipcode" id="zipcode" />
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <label for="area">Size</label>
+                        <input [(ngModel)]="asset.assetDetail.house.area" type="text" name="area" id="area" />
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <label for="status">Status</label>
+                        <select [(ngModel)]="asset.assetDetail.house.status" type="text" name="status" id="status">
+<option value="available">Available</option>
+<option value="rented">Rented</option>
+<option value="sold">Sold</option>
+</select>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="this.asset.assetType == 'item'">
+                    <div class="col-6 col-md-4">
+                        <label for="make">Make</label>
+                        <input [(ngModel)]="asset.assetDetail.item.make" type="text" name="make" id="make" />
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <label for="model">Model</label>
+                        <input [(ngModel)]="asset.assetDetail.item.model" type="text" name="model" id="model" />
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <label for="year">Year</label>
+                        <input [(ngModel)]="asset.assetDetail.item.year" type="text" name="year" id="year" />
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <label for="discription">Discription</label>
+                        <input [(ngModel)]="asset.assetDetail.item.discription" type="text" name="discription" id="discription" />
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <label for="actualPrice">Actual Price</label>
+                        <input [(ngModel)]="asset.assetDetail.item.actualPrice" type="text" name="actualPrice" id="actualPrice" />
+                    </div>
+                </div>
+
+                <h3>Owner</h3>
+                <div class="row">
+                    <div class="col-6 col-md-4">
+                        <label for="name">Name</label>
+                        <input [(ngModel)]="asset.owner.name" type="text" name="name" id="name" />
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <label for="fatherName">Father Name</label>
+                        <input [(ngModel)]="asset.owner.fatherName" type="text" name="fatherName" id="fatherName" />
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <label for="cnic">CNIC</label>
+                        <input [(ngModel)]="asset.owner.cnic" type="text" name="cnic" id="cnic" />
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <label for="mobile1">Mobile 1</label>
+                        <input [(ngModel)]="asset.owner.mobile1" type="text" name="mobile1" id="mobile1" />
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <label for="mobile2">Mobile2</label>
+                        <input [(ngModel)]="asset.owner.mobile2" type="text" name="mobile2" id="mobile2" />
+                    </div>
+                </div>
+                <h6>Address</h6>
+                <div class="row">
+                    <div class="col-6 col-md-4">
+                        <label for="floor">Floor</label>
+                        <input [(ngModel)]="asset.owner.address.floor" type="text" name="floor" id="floor" />
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <label for="number">House Number</label>
+                        <input [(ngModel)]="asset.owner.address.number" type="text" name="number" id="number" />
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <label for="street">Street</label>
+                        <input [(ngModel)]="asset.owner.address.street" type="text" name="street" id="street" />
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <label for="sector">Sector</label>
+                        <input [(ngModel)]="asset.owner.address.sector" type="text" name="sector" id="sector" />
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <label for="city">City</label>
+                        <input [(ngModel)]="asset.owner.address.city" type="text" name="city" id="city" />
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <label for="province">Province</label>
+                        <input [(ngModel)]="asset.owner.address.province" type="text" name="province" id="province" />
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <label for="zipcode">Zip Code</label>
+                        <input [(ngModel)]="asset.owner.address.zipcode" type="text" name="zipcode" id="zipcode" />
+                    </div>
+                </div>
+            </div> -->
+
+        </form>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-success" (click)="addAsset(asset)">
+              Save
+              </button>
+            <button type="button" (click)="close()" class="btn btn-outline-danger">
+              Cancel
+              </button>
+        </div>
+
+    </div>
+</div>
+
+<!-- <pre>{{closeResult}}</pre> -->

@@ -1,34 +1,29 @@
-<div class="conatiner">
-    <div class="wrapper">
-        <div class="box-content">
-            <div class="box1">
-                <div class="box-initial">
-                    <div class="header">
-                        <!-- <img src="Images\insta.png" style="width: 100%; margin-bottom: -17px;"> -->
-                        <h1>AMS System</h1>
-                    </div>
-                    <div class="input-group">
-                        <input type="text" [(ngModel)]="user.userName" placeholder="UserName" class="input" />
-                    </div>
-                    <div class="input-group">
-                        <input type="password" [(ngModel)]="user.password" placeholder="Password" class="input" />
-                    </div>
-                    <input type="button" value="Log in" class="btn1" (click)="getuser(user)" />
-                </div>
-                <div class="box2-content">
-                    Do not have Account? <a href="/signup">Sign up</a>
-                    <input type="button" value="Sign UP" class="btn2" />
-                    <div class="labelGetApp" style="margin-top: 42px">
-                        <label for="GetApp">Get the app</label>
-                    </div>
+<div class="card shadow rounded col-6 col-md-4">
+    <div class="card-header shadow rounded">
+        <!-- <img src="Images\insta.png" style="width: 100%; margin-bottom: -17px;"> -->
+        <h3>HMS System</h3>
+    </div>
 
-                    <div class="image">
-                        <img src="./../../../../assets/appstore.png" style="width: 114px;height:40px;" />
-                        <img src="./../../../../assets/googleplay.png" style="width: 114px;height:40px;" />
-                        <img src="../../../../assets/microsoft.png" style="width: 114px;height:40px;border-radius: 6px;" />
-                    </div>
-                </div>
-            </div>
+    <div class="card-body">
+        <label>User Name</label>
+        <input type="text" [(ngModel)]="user.userName" placeholder="Enter User Name" name="userName" class="input" />
+        <label>Password</label>
+        <input type="password" [(ngModel)]="user.password" placeholder="Enter Password" name="password" class="input" />
+        <div class="alignCenter">
+            <button type="button" value="Log in" class="btn btn-success" (click)="getuser(user)">Log In</button>
+            <button type="button" value="Log in" class="btn btn-primary" (click)="open()">Sign Up</button>
+        </div>
+
+    </div>
+
+
+    <div class="card-footer">
+        <label for="GetApp ">Get the app</label>
+        <div>
+            <img src="/src/assets/appstore.png " class="image" />
+            <img src="/src/assets/msstore.png " class="image" />
+            <img src="/src/assets/playstore.png" class="image" />
         </div>
     </div>
+
 </div>

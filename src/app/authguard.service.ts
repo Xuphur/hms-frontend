@@ -26,7 +26,7 @@ export class AuthguardService {
       this.route.navigate(['/dashboard']);
       return true;
     } else {
-      this.route.navigate(['/login']);
+      this.route.navigate(['/']);
       return false;
     }
   }
